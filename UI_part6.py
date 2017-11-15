@@ -549,8 +549,11 @@ class battle(tk.Frame):
 
         def heal():
             global fpokstats
-            fpokstats['Health'] = fpokstats['Health'] + random.randint(2,5)
-            turn()
+            if(fpokstats['Health'] >= fpokstats['MaxHealth']):
+                print("You can't have moret than", fpokstas['MaxHealth'])
+            else:
+                fpokstats['Health'] = fpokstats['Health'] + random.randint(2,5)
+                turn()
 
         def turn():
             global damage_taken, stats_gained, opstats,fpokstats
