@@ -582,27 +582,7 @@ class battle(tk.Frame):
                 print("You win!")
                 new_battle()
             
-            elif(fpokstats['Type'] == "Fire" and opstats['Type'] == "Water" and fpokstats['Health'] >= 10):		
-                opstats['Attack'] = opstats['Attack'] + 5
-                opstats['Attack'] = opstats['Attack']/fpokstats['Defense']
-                fpokstats['Health'] = fpokstats['Health'] - opstats['Attack']
-                stats_gained["damage_taken"] = stats_gained["damage_taken"] + opstats['Attack']
-                opstats['Attack'] = opstats['Attack']*fpokstats['Defense']
-                opstats['Attack'] = opstats['Attack'] - 5
-                print(opstats["Name"] ,"used his specail")
-                print("\n\n", fpokstats['Name'], "now has", round(fpokstats['Health']),"Health")
-
-            elif(fpokstats['Type'] == "Water" and opstats['Type'] == "Grass" and fpokstats['Health'] >= 10):		
-                opstats['Attack'] = opstats['Attack'] + 5
-                opstats['Attack'] = opstats['Attack']/fpokstats['Defense']
-                fpokstats['Health'] = fpokstats['Health'] - opstats['Attack']
-                stats_gained["damage_taken"] = stats_gained["damage_taken"] + opstats['Attack']
-                opstats['Attack'] = opstats['Attack']*fpokstats['Defense']
-                opstats['Attack'] = opstats['Attack'] - 5
-                print(opstats["Name"] ,"used his specail")
-                print("\n\n", fpokstats['Name'], "now has", round(fpokstats['Health']),"Health")
-
-            elif(fpokstats['Type'] == "Grass" and opstats['Type'] == "Fire" and fpokstats['Health'] >= 10):		
+            elif((fpokstats['Type'] == "Fire" and opstats['Type'] == "Water" and fpokstats['Health'] >= 10) or (fpokstats['Type'] == "Water" and opstats['Type'] == "Grass" and fpokstats['Health'] >= 10) or (fpokstats['Type'] == "Grass" and opstats['Type'] == "Fire" and fpokstats['Health'] >= 10)):		
                 opstats['Attack'] = opstats['Attack'] + 5
                 opstats['Attack'] = opstats['Attack']/fpokstats['Defense']
                 fpokstats['Health'] = fpokstats['Health'] - opstats['Attack']
@@ -638,11 +618,8 @@ class battle(tk.Frame):
             if(opstats['Name'] == 'Torchick'):
                 op_pos = [Odd_stats, Osh_stats]
                 x = random.randint(0, 1)
-            elif(opstats['Name'] == 'Oddish'):
+            elif(opstats['Name'] == 'Oddish' or opstats['Name'] == 'Oshiwish'):
                 op_pos = [Tor_stats, Osh_stats]
-                x = random.randint(0, 1)
-            elif(opstats['Name'] == 'Oshiwish'):
-                op_pos = [Tor_stats, Odd_stats]
                 x = random.randint(0, 1)
             else:
                 op_pos = [Tor_stats, Osh_stats, Odd_stats]
