@@ -32,7 +32,7 @@ global Char_stats, Squit_stats, Duld_stats, f_pok, fpokstats, duld, char, squirt
 #global all pokemon stats might be able to put all pokemon in on array?
 level = 5
 Char_stats = {'Name': 'Charzard', 'Attack' : 10, 'Defense' : 1.5, 'Health' : 25,'Type' : "Fire",
-              'Specail' :'Ember', 'Exp' : 0,'Level' : 10, 'Req' : 20, 'Pic' : """
+              'Specail' :'Ember', 'Exp' : 0, 'MaxHealth' : 25, 'Level' : 10, 'Req' : 20, 'Pic' : """
                                                                                                     
                                                                                                     
                                  `.--.`                                                             
@@ -89,7 +89,7 @@ Char_stats = {'Name': 'Charzard', 'Attack' : 10, 'Defense' : 1.5, 'Health' : 25,
 """}
 
 Squit_stats = {'Name': 'Squirtale', 'Attack' : 8, 'Defense' : 3.5, 'Health' : 25,'Type' : "Water",
-               'Specail' :'Water Gun', 'Exp' : 0, 'Level' : 10, 'Req' : 20, 'Pic' : """
+               'Specail' :'Water Gun', 'Exp' : 0, 'MaxHealth' : 25, 'Level' : 10, 'Req' : 20, 'Pic' : """
                                 `..-----::-----..                                                   
                             ..-:--....-----------::-.                                               
                          `-:-..`....----------------::-`                                            
@@ -146,7 +146,7 @@ Squit_stats = {'Name': 'Squirtale', 'Attack' : 8, 'Defense' : 3.5, 'Health' : 25
 """}
 
 Duld_stats = {'Name': 'Duldasuar', 'Attack' : 8, 'Defense' : 1.5, 'Health' : 35,'Type' : "Grass",
-              'Specail' :'Leafs', 'Exp' : 0, 'Level' : 10, 'Req' : 20,'Pic' : """
+              'Specail' :'Leafs', 'Exp' : 0, 'MaxHealth' : 35, 'Level' : 10, 'Req' : 20,'Pic' : """
 
                     y                                                                               
             NsshN h//oN                                                                             
@@ -197,7 +197,7 @@ Nooooooooooooosssossyhhhyyyyyyh+:::/:::::::::ssss/  +ssy.    //:::::::::o+/:::::
                                           +oNNo::d                                       """}
 
 Osh_stats = {'Name': 'Oshiwish', 'Attack' : 6, 'Defense' : 1, 'Health' : 25,'Type' : "Water",
-              'Exp' : 0, 'Level' : level, 'Req' : 10,'Specail' :'Water Gun', 'Pic' : """
+              'Exp' : 0, 'MaxHealth' : 25, 'Level' : level, 'Req' : 10,'Specail' :'Water Gun', 'Pic' : """
                               so++/   /+oss                                          
                          hs+/-.````   `````. o dN                                     
                     Nho-```                   ``-+hN                                  
@@ -248,7 +248,7 @@ Osh_stats = {'Name': 'Oshiwish', 'Attack' : 6, 'Defense' : 1, 'Health' : 25,'Typ
 """}
 
 Odd_stats = {'Name': 'Oddush', 'Attack' : 6, 'Defense' : 1, 'Health' : 20,'Type' : "Grass",
-              'Exp' : 0, 'Level' : level, 'Req' : 10,'Specail' :'Leafs', 'Pic' : """
+              'Exp' : 0, 'MaxHealth' : 20, 'Level' : level, 'Req' : 10,'Specail' :'Leafs', 'Pic' : """
  `.``                                                                                  
   .:////:-.                                                                            
     ./++++/:`                     ```..--                                              
@@ -293,7 +293,7 @@ Odd_stats = {'Name': 'Oddush', 'Attack' : 6, 'Defense' : 1, 'Health' : 20,'Type'
 """}
 
 Tor_stats = {'Name': 'Torchick', 'Attack' : 8, 'Defense' : 1, 'Health' : 20,'Type' : "Fire",
-              'Exp' : 0, 'Level' : level, 'Req' : 10, 'Specail' :'Ember', 'Pic' : """
+              'Exp' : 0, 'MaxHealth' : 20, 'Level' : level, 'Req' : 10, 'Specail' :'Ember', 'Pic' : """
                                          s+:          
 										  
                                       Nh+-..                               
