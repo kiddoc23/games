@@ -346,7 +346,7 @@ y s///:::::::::///////s+:os/////////////////
 
 f_pok = ""
 fpokstats = 0
-stats_gained = {'damage_taken' : 0, 'defence_gained' : 0, 'damage_given' : 0, 'defense_earned' : 0}
+stats_gained = {'damage_taken' : 0, 'defence_gained' : 0, 'damage_given' : 0, 'defense_earned' : 0, 'health_gained' : 0}
 
 class main(tk.Tk): #This is required for tkinter if you want to have the windows one behind another
 
@@ -494,8 +494,13 @@ class battle(tk.Frame):
         
         button3 = tk.Button(self, text="Specail", font = LARGE_FONT,
                                 command=lambda: specail())
-        button3.grid(row=1, column=2)
+        button3.grid(row=2, column=0)
         button3.config(height = 3, width = 10)
+
+        button4 = tk.Button(self, text="Heal", font = LARGE_FONT,
+                            command=lambda: heal())
+        button4.grid(row=2, column=1)
+        button4.config(height = 3, width = 10)
 
         def attack():
             global opstats, stats_gained
@@ -542,6 +547,11 @@ class battle(tk.Frame):
             print(opstats['Name'], "now has", round(opstats['Health']), "HP")
             turn()
 
+        def heal():
+            global fpokstats
+            fpokstats['Health'] = fpokstats['Health'] + random.randint(2,5)
+            turn()
+
         def turn():
             global damage_taken, stats_gained, opstats,fpokstats
             
@@ -562,6 +572,7 @@ class battle(tk.Frame):
                     print("------------------------------------------------------------")
                     print(fpokstats['Name'], "Leveled up and is now level", fpokstats['Level'])
                     time.sleep(2)
+                    fpokstats['Health'] = fpokstats['Health'] - stats_gained['health_gained']
                     fpokstats['Health'] = fpokstats['Health'] + stats_gained['damage_taken']
                     print("------------------------------------------------------------")
                 print(fpokstats['Name'], "gained 7 exp and now has", fpokstats['Exp'], "Exp")
@@ -607,6 +618,13 @@ class battle(tk.Frame):
                 print("\n\n", fpokstats['Name'], "now has", round(fpokstats['Health']),"Health")
 
             if(fpokstats['Health'] <= 0):
+                fpokstats['Health'] = fpokstats['Health'] + stats_gained['damage_taken']
+                fpokstats['Health'] = fpokstats['Health'] - stats_gained['health_gained']
+                fpokstats['Defense'] = fpokstats['Defense'] - stats_gained['defence_gained']
+                opstats['Health'] = opstats['Health'] + stats_gained['damage_given']
+                stats_gained['damage_given'] = 0
+                stats_gained['damage_taken'] = 0
+                stats_gained['defence_gained'] = 0
                 print("You lost!")
                 print("GAME OVER!")
                 (self, controller.show_frame(Game))
