@@ -31,7 +31,7 @@ LARGE_FONT = ("Verdana", 12)
 global Char_stats, Squit_stats, Duld_stats, f_pok, fpokstats, duld, char, squirt, damage_taken, defence_gained, damage_given, defense_earned, level
 #global all pokemon stats might be able to put all pokemon in on array?
 level = 5
-Char_stats = {'Name': 'Charzard', 'Attack' : 10, 'Defense' : 1.5, 'Health' : 25,'Type' : "Fire",
+Char_stats = {'Name': 'Charzard', 'Attack' : 10, 'Defense' : 1.2, 'Health' : 25,'Type' : "Fire",
               'Specail' :'Ember', 'Exp' : 0, 'MaxHealth' : 25, 'Level' : 10, 'Req' : 20, 'Pic' : """
                                                                                                     
                                                                                                     
@@ -88,7 +88,7 @@ Char_stats = {'Name': 'Charzard', 'Attack' : 10, 'Defense' : 1.5, 'Health' : 25,
                                                   -:: -. .-`     
 """}
 
-Squit_stats = {'Name': 'Squirtale', 'Attack' : 8, 'Defense' : 3.5, 'Health' : 25,'Type' : "Water",
+Squit_stats = {'Name': 'Squirtale', 'Attack' : 8, 'Defense' : 2.2, 'Health' : 25,'Type' : "Water",
                'Specail' :'Water Gun', 'Exp' : 0, 'MaxHealth' : 25, 'Level' : 10, 'Req' : 20, 'Pic' : """
                                 `..-----::-----..                                                   
                             ..-:--....-----------::-.                                               
@@ -145,7 +145,7 @@ Squit_stats = {'Name': 'Squirtale', 'Attack' : 8, 'Defense' : 3.5, 'Health' : 25
                                                           .---     
 """}
 
-Duld_stats = {'Name': 'Duldasuar', 'Attack' : 8, 'Defense' : 1.5, 'Health' : 35,'Type' : "Grass",
+Duld_stats = {'Name': 'Duldasuar', 'Attack' : 8, 'Defense' : 1.2, 'Health' : 35,'Type' : "Grass",
               'Specail' :'Leafs', 'Exp' : 0, 'MaxHealth' : 35, 'Level' : 10, 'Req' : 20,'Pic' : """
 
                     y                                                                               
@@ -513,8 +513,8 @@ class battle(tk.Frame):
 
         def defend():
             global fpokstats, stats_gained
-            fpokstats['Defense'] = fpokstats['Defense'] + 1
-            stats_gained["defence_gained"] = stats_gained["defence_gained"] +1
+            fpokstats['Defense'] = fpokstats['Defense'] + 0.2
+            stats_gained["defence_gained"] = stats_gained["defence_gained"] +0.2
             print(fpokstats['Defense'], "defense")
             turn()
 
@@ -552,7 +552,7 @@ class battle(tk.Frame):
             if(fpokstats['Health'] >= fpokstats['MaxHealth']):
                 print("You can't have moret than", fpokstats['MaxHealth'])
             else:
-                fpokstats['Health'] = fpokstats['Health'] + random.randint(2,5)
+                fpokstats['Health'] = fpokstats['Health'] + random.randint(2,4)
                 turn()
 
         def turn():
@@ -562,7 +562,6 @@ class battle(tk.Frame):
                 fpokstats['Defense'] = fpokstats['Defense'] - stats_gained['defence_gained']
                 opstats['Health'] = opstats['Health'] + stats_gained['damage_given']
                 stats_gained['damage_given'] = 0
-                stats_gained['damage_taken'] = 0
                 stats_gained['defence_gained'] = 0
                 fpokstats['Exp'] = fpokstats['Exp'] +7
                 if(fpokstats['Exp'] >= fpokstats['Req']):
@@ -572,17 +571,21 @@ class battle(tk.Frame):
                     fpokstats['Defense'] = fpokstats['Defense'] +0.2
                     fpokstats['Exp'] = 0
                     fpokstats['Req'] = fpokstats['Req'] +5
+                    fpokstats['MaxHealth'] = fpokstats['MaxHealth'] +2
                     print("------------------------------------------------------------")
                     print(fpokstats['Name'], "Leveled up and is now level", fpokstats['Level'])
                     time.sleep(2)
                     fpokstats['Health'] = fpokstats['Health'] - stats_gained['health_gained']
                     fpokstats['Health'] = fpokstats['Health'] + stats_gained['damage_taken']
+                    stats_gained['damage_taken'] = 0
                     print("------------------------------------------------------------")
                 print(fpokstats['Name'], "gained 7 exp and now has", fpokstats['Exp'], "Exp")
                 print("You win!")
                 new_battle()
             
-            elif((fpokstats['Type'] == "Fire" and opstats['Type'] == "Water" and fpokstats['Health'] >= 10) or (fpokstats['Type'] == "Water" and opstats['Type'] == "Grass" and fpokstats['Health'] >= 10) or (fpokstats['Type'] == "Grass" and opstats['Type'] == "Fire" and fpokstats['Health'] >= 10)):		
+            elif((fpokstats['Type'] == "Fire" and opstats['Type'] == "Water" and fpokstats['Health'] >= 10) or
+                 (fpokstats['Type'] == "Water" and opstats['Type'] == "Grass" and fpokstats['Health'] >= 10) or
+                 (fpokstats['Type'] == "Grass" and opstats['Type'] == "Fire" and fpokstats['Health'] >= 10)):		
                 opstats['Attack'] = opstats['Attack'] + 5
                 opstats['Attack'] = opstats['Attack']/fpokstats['Defense']
                 fpokstats['Health'] = fpokstats['Health'] - opstats['Attack']
@@ -608,6 +611,7 @@ class battle(tk.Frame):
                 stats_gained['damage_given'] = 0
                 stats_gained['damage_taken'] = 0
                 stats_gained['defence_gained'] = 0
+                stats_gained['MaxHealth'] = 0
                 print("You lost!")
                 print("GAME OVER!")
                 (self, controller.show_frame(Game))
