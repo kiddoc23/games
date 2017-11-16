@@ -1,5 +1,5 @@
 #!/bin/python
-#Made by - Magnus Reid - 2017
+#Made by - Finlay Bryden, Logan Chalmers, Kieran Docherty, Calvin Earnshaw, Joe Johnston, Magnus Reid - 2017
 #This is the base for any tkinter programs i write
 #Can use console and Gui at same time
 import random
