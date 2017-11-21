@@ -1,5 +1,5 @@
 #!/bin/python
-#Made by - Kieran Docherty- 2017
+#Made by - Kieran Docherty, Logan Chalmers, Scott Whailin, Calvin Earnshaw, Magnus a little, and Joe- 2017
 #This is the base for any tkinter programs i write
 #Can use console and Gui at same time
 import random
