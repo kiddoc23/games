@@ -96,7 +96,7 @@ pygame.init()
 screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
  
 # Set the title of the window
-pygame.display.set_caption('Test')
+pygame.display.set_caption('Pokémon Alpha v0.0.1 UI - by Kieran D, Logan C, Calvin E, Scott W')
  
 # List to hold all the sprites
 all_sprite_list = pygame.sprite.Group()
