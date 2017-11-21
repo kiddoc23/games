@@ -1,5 +1,5 @@
 #!/bin/python
-#Made by - Kieran Docherty, Finlay Bryden - 2017
+#Made by - Kieran Docherty- 2017
 #This is the base for any tkinter programs i write
 #Can use console and Gui at same time
 import random
@@ -31,8 +31,9 @@ LARGE_FONT = ("Verdana", 12)
 global Char_stats, Squit_stats, Duld_stats, f_pok, fpokstats, duld, char, squirt, damage_taken, defence_gained, damage_given, defense_earned, level
 #global all pokemon stats might be able to put all pokemon in on array?
 level = 5
+Char_specail = ['Ember', 25, 25, 5]
 Char_stats = {'Name': 'Charzard', 'Attack' : 10, 'Defense' : 1.5, 'Health' : 25,'Type' : "Fire", 
-              'Specail' : 25 , 'Exp' : 0, 'MaxHealth' : 25, 'Level' : 10, 'Req' : 20, 'Pic' : """
+              'Specail' : Char_specail , 'Exp' : 0, 'MaxHealth' : 25, 'Level' : 10, 'Req' : 20, 'Pic' : """
                                                                                                     
                                                                                                     
                                  `.--.`                                                             
@@ -88,8 +89,9 @@ Char_stats = {'Name': 'Charzard', 'Attack' : 10, 'Defense' : 1.5, 'Health' : 25,
                                                   -:: -. .-`     
 """}
 
+Squit_specail = ['Water Gun', 25, 20, 5]
 Squit_stats = {'Name': 'Squirtale', 'Attack' : 8, 'Defense' : 3.5, 'Health' : 25,'Type' : "Water",
-               'Specail' :25, 'Exp' : 0, 'MaxHealth' : 25, 'Level' : 10, 'Req' : 20, 'Pic' : """
+               'Specail' :Squit_specail, 'Exp' : 0, 'MaxHealth' : 25, 'Level' : 10, 'Req' : 20, 'Pic' : """
                                 `..-----::-----..                                                   
                             ..-:--....-----------::-.                                               
                          `-:-..`....----------------::-`                                            
@@ -145,8 +147,9 @@ Squit_stats = {'Name': 'Squirtale', 'Attack' : 8, 'Defense' : 3.5, 'Health' : 25
                                                           .---     
 """}
 
+Duld_specail = ['Leaves', 25, 20, 5]
 Duld_stats = {'Name': 'Duldasuar', 'Attack' : 8, 'Defense' : 1.5, 'Health' : 35,'Type' : "Grass",
-              'Specail' : 25, 'Exp' : 0, 'MaxHealth' : 35, 'Level' : 10, 'Req' : 20,'Pic' : """
+              'Specail' : Duld_specail, 'Exp' : 0, 'MaxHealth' : 35, 'Level' : 10, 'Req' : 20,'Pic' : """
 
                     y                                                                               
             NsshN h//oN                                                                             
@@ -520,32 +523,32 @@ class battle(tk.Frame):
 
         def specail():
             global fpokstats, stats_gained, damage_given
-            if(fpokstats['Specail'] >=1):
+            if(fpokstats['Specail'] [1] >=1):
                 if(opstats['Type'] == "Fire" and fpokstats['Type'] == "Water" or
                    opstats['Type'] == "Water" and fpokstats['Type'] == "Grass" or
                    opstats['Type'] == "Grass" and fpokstats['Type'] == "Fire"):
-                    fpokstats['Attack'] = fpokstats['Attack']/opstats['Defense']
-                    fpokstats['Attack'] = fpokstats['Attack'] + 5
+                    fpokstats['Attack'] = fpokstats['Specail'] [2] + 5
+                    fpokstats['Attack'] = fpokstats['Specail'] [2]/opstats['Defense']
                     opstats['Health'] = opstats['Health'] - fpokstats['Attack']
                     stats_gained["damage_given"] = stats_gained["damage_given"] + fpokstats['Attack']
-                    print("Specail did", fpokstats["Attack"], "damage. IT WAS SUPER EFFECTIVE!")
-                    fpokstats['Attack'] = fpokstats['Attack'] - 5
-                    fpokstats['Attack'] = fpokstats['Attack']*opstats['Defense']
+                    print(fpokstats['Specail'] [0], "did", fpokstats["Attack"], "damage. IT WAS SUPER EFFECTIVE!")
+                    fpokstats['Attack'] = fpokstats['Specail'] [2]*opstats['Defense']
+                    fpokstats['Attack'] = fpokstats['Specail'] [2] - 5
                 elif(opstats['Type'] == fpokstats['Type']):
-                    fpokstats['Attack'] = fpokstats['Attack']/opstats['Defense']
+                    fpokstats['Attack'] = fpokstats['Specail'] [3]/opstats['Defense']
                     opstats['Health'] = opstats['Health'] - fpokstats['Attack']
                     stats_gained['damage_given'] = stats_gained['damage_given'] + fpokstats['Attack']
-                    print("Specail did", fpokstats['Attack'], "damage. IT WASN'T EFFECTIVE!")
-                    fpokstats['Attack'] = fpokstats['Attack']*opstats['Defense']
+                    print(fpokstats['Specail'] [0], "did", fpokstats['Attack'], "damage. IT WASN'T EFFECTIVE!")
+                    fpokstats['Attack'] = fpokstats['Specail'] [3]*opstats['Defense']
                 else:
-                    fpokstats['Attack'] = fpokstats['Attack'] - 5
-                    fpokstats['Attack'] = fpokstats['Attack']/opstats['Defense']
+                    fpokstats['Attack'] = fpokstats['Specail'] [3] - 5
+                    fpokstats['Attack'] = fpokstats['Specail'] [3]/opstats['Defense']
                     opstats['Health'] = opstats['Health'] - fpokstats['Attack']
                     stats_gained['damage_given'] = stats_gained['damage_given'] + fpokstats['Attack']
-                    print("Specail did", fpokstats['Attack'], "damage. IT WASN'T EFFECTIVE!")
-                    fpokstats['Attack'] = fpokstats['Attack']*opstats['Defense']
-                    fpokstats['Attack'] = fpokstats['Attack'] + 5
-                fpokstats['Specail'] = fpokstats['Specail'] -1
+                    print(fpokstats['Specail'] [0],"did", fpokstats['Attack'], "damage. IT WASN'T EFFECTIVE!")
+                    fpokstats['Attack'] = fpokstats['Specail'] [3]*opstats['Defense']
+                    fpokstats['Attack'] = fpokstats['Specail'] [3] + 5
+                fpokstats['Specail'] [1] = fpokstats['Specail'] [1] -1
                 print(opstats['Name'], "now has", round(opstats['Health']), "HP")
                 turn()
 
@@ -581,7 +584,7 @@ class battle(tk.Frame):
                     time.sleep(2)
                     fpokstats['Health'] = fpokstats['MaxHealth']
                     stats_gained['damage_taken'] = 0
-                    fpokstats['Specail'] = 25
+                    fpokstats['Specail'] [1] = 25
                     print("------------------------------------------------------------")
                 print(fpokstats['Name'], "gained 7 exp and now has", fpokstats['Exp'], "Exp")
                 print("You win!")
