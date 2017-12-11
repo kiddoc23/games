@@ -619,9 +619,8 @@ class battle(tk.Frame):
                                 self.rect.left = block.rect.right
 
                         for enemey in block_hit_list:
-                            print("Collisoin")
-                            time.sleep(1)
-                            chance = random.randint(1,2)
+                            time.sleep(0.25)
+                            chance = random.randint(1,5)
                             if(chance == 1):
                                 new_battle()
                                 pygame.quit()
@@ -640,9 +639,8 @@ class battle(tk.Frame):
                                 self.rect.top = block.rect.bottom
 
                         for enemey in block_hit_list:
-                            print("Collision")
-                            time.sleep(1)
-                            chance = random.randint(1,2)
+                            time.sleep(0.25)
+                            chance = random.randint(1,5)
                             if(chance == 1):
                                 new_battle()
                                 pygame.quit()
@@ -717,23 +715,23 @@ class battle(tk.Frame):
                             done = True
  
                         elif event.type == pygame.KEYDOWN:
-                            if event.key == pygame.K_LEFT:
+                            if event.key == pygame.K_a:
                                 player.changespeed(-3, 0)
-                            elif event.key == pygame.K_RIGHT:
+                            elif event.key == pygame.K_d:
                                 player.changespeed(3, 0)
-                            elif event.key == pygame.K_UP:
+                            elif event.key == pygame.K_w:
                                 player.changespeed(0, -3)
-                            elif event.key == pygame.K_DOWN:
+                            elif event.key == pygame.K_s:
                                 player.changespeed(0, 3)
  
                         elif event.type == pygame.KEYUP:
-                            if event.key == pygame.K_LEFT:
+                            if event.key == pygame.K_a:
                                 player.changespeed(3, 0)
-                            elif event.key == pygame.K_RIGHT:
+                            elif event.key == pygame.K_d:
                                 player.changespeed(-3, 0)
-                            elif event.key == pygame.K_UP:
+                            elif event.key == pygame.K_w:
                                 player.changespeed(0, 3)
-                            elif event.key == pygame.K_DOWN:
+                            elif event.key == pygame.K_s:
                                 player.changespeed(0, -3)
  
                     all_sprite_list.update()
@@ -747,6 +745,8 @@ class battle(tk.Frame):
                     clock.tick(60)
  
                 pygame.quit()
+############################################################################################################################################################
+                
             if(fpokstats['Type'] == "Fire" and opstats['Type'] == "Water" and fpokstats['Health'] >= 10):		
                 opstats['Attack'] = opstats['Attack'] + 5
                 opstats['Attack'] = opstats['Attack']/fpokstats['Defense']
