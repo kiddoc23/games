@@ -10,6 +10,7 @@ import pygame
 import random
 import sys
 import time
+import pdb
  
 """
 x = 0,200 and
@@ -23,6 +24,7 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 BLUE = (50, 50, 255)
 ORANGE = (255, 0, 255)
+GREEN = (127, 255, 0)
 # Screen dimensions
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
@@ -623,7 +625,9 @@ class battle(tk.Frame):
                             chance = random.randint(1,5)
                             if(chance == 1):
                                 new_battle()
+                                running = False
                                 pygame.quit()
+                                sys.exit()
                  
                         # Move up/down
                         self.rect.y += self.change_y
@@ -643,7 +647,9 @@ class battle(tk.Frame):
                             chance = random.randint(1,5)
                             if(chance == 1):
                                 new_battle()
+                                running = False
                                 pygame.quit()
+                                sys.exit()
  
  
                 class Wall(pygame.sprite.Sprite):
@@ -656,6 +662,22 @@ class battle(tk.Frame):
                         # Make a blue wall, of the size specified inpygame.quit() the parameters
                         self.image = pygame.Surface([width, height])
                         self.image.fill(BLUE)
+ 
+                        # Make our top-left corner the passed-in location.
+                        self.rect = self.image.get_rect()
+                        self.rect.y = y
+                        self.rect.x = x
+
+                class Enemy(pygame.sprite.Sprite):
+                    """ Wall the player can run into. """
+                    def __init__(self, x, y, width, height):
+                        """ Constructor for the wall that the player can run into. """
+                        # Call the parent's constructor
+                        super().__init__()
+ 
+                        # Make a blue wall, of the size specified inpygame.quit() the parameters
+                        self.image = pygame.Surface([width, height])
+                        self.image.fill(GREEN)
  
                         # Make our top-left corner the passed-in location.
                         self.rect = self.image.get_rect()
@@ -694,7 +716,7 @@ class battle(tk.Frame):
                 wall_list.add(wall)
                 all_sprite_list.add(wall)
 
-                enemy = Wall(100, 100, 10, 10)
+                enemy = Enemy(100, 100, 10, 10)
                 wall_list.add(enemy)
                 all_sprite_list.add(enemy)
  
@@ -735,7 +757,7 @@ class battle(tk.Frame):
                                 player.changespeed(0, -3)
  
                     all_sprite_list.update()
- 
+                    
                     screen.fill(BLACK)
  
                     all_sprite_list.draw(screen)
@@ -752,7 +774,7 @@ class battle(tk.Frame):
                 opstats['Attack'] = opstats['Attack']/fpokstats['Defense']
                 fpokstats['Health'] = fpokstats['Health'] - opstats['Attack']
                 stats_gained["damage_taken"] = stats_gained["damage_taken"] + opstats['Attack']
-                opstats['Attack'] = opstats*fpokstats['Defense']
+                opstats['Attack'] = opstats['Attack']*fpokstats['Defense']
                 opstats['Attack'] = opstats['Attack'] - 5
                 print(opstats["Name"] ,"used his specail")
                 print("\n\n", fpokstats['Name'], "now has", round(fpokstats['Health']),"Health")
@@ -796,6 +818,7 @@ class battle(tk.Frame):
                 fpokstats['Specail'] = 25
                 print("You lost!")
                 print("GAME OVER!")
+                (self, controller.show_frame(Game))
 
         def new_battle():
             global opstats, level
@@ -808,6 +831,7 @@ class battle(tk.Frame):
                 x = random.randint(0, 2)
             opstats = op_pos[x]
             print(opstats['Pic'])
+            print("You found a random", opstats['Name'])
             
 
 
