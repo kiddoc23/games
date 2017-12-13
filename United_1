@@ -623,7 +623,7 @@ class battle(tk.Frame):
                                 
                         block_hit_list = pygame.sprite.spritecollide(self, self.enemy, False)
                         for block in block_hit_list:
-                            chance = random.randint(1,20)
+                            chance = random.randint(1,100)
                             if(chance == 1):
                                 new_battle()
                                 running = False
@@ -645,7 +645,7 @@ class battle(tk.Frame):
                         
                         block_hit_list = pygame.sprite.spritecollide(self, self.enemy, False)
                         for block in block_hit_list:
-                            chance = random.randint(1,20)
+                            chance = random.randint(1,100)
                             if(chance == 1):
                                 new_battle()
                                 running = False
@@ -718,17 +718,117 @@ class battle(tk.Frame):
                 wall_list.add(wall)
                 all_sprite_list.add(wall)
 
-                enemy = Enemy(100, 100, 10, 10)
-                enemy_list.add(enemy)
-                all_sprite_list.add(enemy)
- 
                 # Create the player paddle object
                 player = Player(50, 50)
                 player.enemy = enemy_list
                 player.walls = wall_list
  
                 all_sprite_list.add(player)
- 
+
+                enemy = Enemy(100, 100, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Enemy(100, 115, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Enemy(100, 130, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Enemy(100, 145, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Enemy(100, 160, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Enemy(130, 100, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Enemy(145, 100, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Enemy(160, 100, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Enemy(115, 100, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Enemy(160, 115, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Enemy(160, 130, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Enemy(160, 145, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Enemy(160, 160, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Enemy(115, 160, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Enemy(130, 160, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Enemy(145, 160, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Enemy(145, 145, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Enemy(145, 130, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Enemy(145, 115, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Enemy(130, 145, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Enemy(130, 130, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Enemy(130, 115, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Enemy(115, 145, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Enemy(130, 130, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Enemy(115, 130, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Enemy(115, 115, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
                 clock = pygame.time.Clock()
  
                 done = False
