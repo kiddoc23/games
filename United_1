@@ -369,6 +369,50 @@ y s///:::::::::///////s+:os/////////////////
                      +s  
 """}
 
+Cyn_specail = ['Ember', 20, 25, 5]
+Cyn_stats = {'Name': 'cyndaquil ', 'Attack' : 9, 'Defense' : 1, 'Health' : 22,'Type' : "Fire",
+              'Exp' : 0, 'MaxHealth' : 22, 'Level' : level, 'Req' : 10, 'Specail' :Cyn_specail, 'Pic' :"""                                                                                                   
+                                           :.                                                       
+                                           //.                                                      
+                                           ///-                                                     
+                                          `////-     .`        `......``                            
+                                     .:`  `/////-   .+:   `-:/oooooossssso/-`                       
+                                     `/:. `//////-  /++.-+ossooooooooossyyhys/-                     
+                                     `///-.//////+..o+osssoooooooooooossyyyyyyyo-`                  
+                                      :///+///////++oyyysoooosoooooooosyyyyyyyyyy+`                 
+                           `:.      ``-///////:///+ohyo/:--..--:/+osssyyyyyyyyyyyys.                
+                            :+:.`   :/://////:-:/+oho-............-:oyyyyyyyyyyyyyyy.               
+``` ``                      `/++/.`.-+++//+//:-:++yo................./shyyyyyyyyyyyys               
+.-::/::--.```             `:-:o+++/-oo++++++:---++y-..................-shyyyyyyyyyhyh:              
+  `.:///////::-.``    `:.``.++++++++o++++/+/----//o........-/+/::-......shyyyyyyyyyyhs`             
+     `-://////////::--.-o+/::o+++++++++++/::-----:+.......-+-....-:/....-shyyyyyyyyyhho-`           
+        .://////////++++o+++++++++++//+++/--------+......./-.......-+:...-syhyyyyyyyyyyhyo:`        
+          `.:///////++++++++++++++///--:/:--------/:......--.........//...-yyyyyyhyyyyyhyyhy+.      
+          ````.://////++//////:-:::::---------:---+s................../:...:syyyyyyyyyyyyyyyyyo.    
+          .:+++/+o++++++++/::::-.-..--..------:/:+yhs-.................-.......--::/+osyhyyyssss/`  
+            `-:+++++++++++++/:--------------//:syyyyhy/.................................:+ossoooos- 
+               `.:++++++++//::-------------+oyssyyyyhhyo:...................................-/+ssoy.
+               .::/+o++++++/:------------/ssyyyyyyyo/-.-:/::--.........---::/::::::::::--.......::-o
+                `.-:/++++++++/---::---::+ooossyyyo-.....-://////+++++//::-.`          ``----:--..:.+
+                ``.-:+o+++++/::--::-/osooooosssy/.....::-.--::::::-.:.                       `.-/:-`
+         ``..-:///++++++///:-----:/osssoooossyy/........::......-:...:.                             
+     `.-:///////////+++++++++//:/+ooysooossyyy/.:........-/.....-:..../                             
+     .----:::///++++++++++++++//+yyyyyyssyyy+-..-/-.......-/..../-..../                             
+            `````..-:+o++++++//:syyso++++/:-....../:-.....-o....:-.../-                             
+                   -:/+o+++++++sy/-........--......-:///:/+/....-o://-                              
+                   `.:++++++++os-............:........---:-......:ss.                               
+                 .://///:::---+-.................................:o//.                              
+                 `````        /................:...............-:/+///`                             
+                              :/-............../...........---::/+///+.                             
+                              .o::----.........+-....---::::////////++`                             
+                               /////:::::--:::/s:::://////+++++++++o+.                              
+                               `+///////////+os++++++++ooosoooooooo:`                               
+                                .+////////+oo+++////::-sooooooooos.                                 
+                                 .+///////o.```        `/+oooooooo+-                                
+                                  -+//////+o`             .--:///::.                                
+                                   .:/o/:///`                                                       
+"""}
+
 f_pok = ""
 fpokstats = 0
 stats_gained = {'damage_taken' : 0, 'defence_gained' : 0, 'damage_given' : 0, 'defense_earned' : 0, 'health_gained' : 0}
@@ -927,8 +971,8 @@ class battle(tk.Frame):
         def new_battle():
             global opstats, level
             level = random.randint(1,6)
-            op_pos = [Tor_stats, Osh_stats, Odd_stats]
-            x = random.randint(0, 2)
+            op_pos = [Tor_stats, Osh_stats, Odd_stats, Cyn_stats]
+            x = random.randint(0, 3)
             opstats = op_pos[x]
             print(opstats['Pic'])
             print("You found a random", opstats['Name'])
