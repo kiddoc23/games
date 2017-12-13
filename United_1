@@ -598,6 +598,7 @@ class battle(tk.Frame):
                         self.change_x = 0
                         self.change_y = 0
                         self.walls = None
+                        self.enemy = None
  
                     def changespeed(self, x, y):
                         """ Change the speed of the player. """
@@ -619,10 +620,10 @@ class battle(tk.Frame):
                             else:
                                 # Otherwise if we are moving left, do the opposite.
                                 self.rect.left = block.rect.right
-
-                        for enemey in block_hit_list:
-                            time.sleep(0.25)
-                            chance = random.randint(1,5)
+                                
+                        block_hit_list = pygame.sprite.spritecollide(self, self.enemy, False)
+                        for block in block_hit_list:
+                            chance = random.randint(1,20)
                             if(chance == 1):
                                 new_battle()
                                 running = False
@@ -641,10 +642,10 @@ class battle(tk.Frame):
                                 self.rect.bottom = block.rect.top
                             else:
                                 self.rect.top = block.rect.bottom
-
-                        for enemey in block_hit_list:
-                            time.sleep(0.25)
-                            chance = random.randint(1,5)
+                        
+                        block_hit_list = pygame.sprite.spritecollide(self, self.enemy, False)
+                        for block in block_hit_list:
+                            chance = random.randint(1,20)
                             if(chance == 1):
                                 new_battle()
                                 running = False
@@ -699,6 +700,7 @@ class battle(tk.Frame):
  
                 # Make the walls. (x_pos, y_pos, width, height)
                 wall_list = pygame.sprite.Group()
+                enemy_list = pygame.sprite.Group()
  
                 wall = Wall(0, 0, 10, 600)
                 wall_list.add(wall)
@@ -717,11 +719,12 @@ class battle(tk.Frame):
                 all_sprite_list.add(wall)
 
                 enemy = Enemy(100, 100, 10, 10)
-                wall_list.add(enemy)
+                enemy_list.add(enemy)
                 all_sprite_list.add(enemy)
  
                 # Create the player paddle object
                 player = Player(50, 50)
+                player.enemy = enemy_list
                 player.walls = wall_list
  
                 all_sprite_list.add(player)
@@ -769,7 +772,7 @@ class battle(tk.Frame):
                 pygame.quit()
 ############################################################################################################################################################
                 
-            if(fpokstats['Type'] == "Fire" and opstats['Type'] == "Water" and fpokstats['Health'] >= 10):		
+            elif(fpokstats['Type'] == "Fire" and opstats['Type'] == "Water" and fpokstats['Health'] >= 10):		
                 opstats['Attack'] = opstats['Attack'] + 5
                 opstats['Attack'] = opstats['Attack']/fpokstats['Defense']
                 fpokstats['Health'] = fpokstats['Health'] - opstats['Attack']
@@ -816,19 +819,16 @@ class battle(tk.Frame):
                 stats_gained['damage_taken'] = 0
                 stats_gained['defence_gained'] = 0
                 fpokstats['Specail'] = 25
+                fpokstats['Health'] = fpokstats['MaxHealth']
                 print("You lost!")
                 print("GAME OVER!")
                 (self, controller.show_frame(Game))
 
         def new_battle():
             global opstats, level
-            level =random.randint(1, 6)
-            if((opstats['Name'] == 'Torchick') or (opstats['Name'] == 'Oddish') or (opstats['Name'] == 'Oshiwish')):
-                op_pos = [Odd_stats, Osh_stats]
-                x = random.randint(0, 1)
-            else:
-                op_pos = [Tor_stats, Osh_stats, Odd_stats]
-                x = random.randint(0, 2)
+            level = random.randint(1,6)
+            op_pos = [Tor_stats, Osh_stats, Odd_stats]
+            x = random.randint(0, 2)
             opstats = op_pos[x]
             print(opstats['Pic'])
             print("You found a random", opstats['Name'])
