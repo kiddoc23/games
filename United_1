@@ -1082,8 +1082,8 @@ class battle(tk.Frame):
         def new_battle():
             global opstats, level
             level = random.randint(1,6)
-            op_pos = [Tor_stats, Osh_stats, Odd_stats, Cyn_stats]
-            x = random.randint(0, 3)
+            op_pos = [Tor_stats, Osh_stats, Odd_stats, Cyn_stats, Tree_stats, Mud_stats]
+            x = random.randint(0, 5)
             opstats = op_pos[x]
             print(opstats['Pic'])
             print("You found a random", opstats['Name'])
