@@ -824,7 +824,7 @@ class battle(tk.Frame):
                         self.rect.y = y
                         self.rect.x = x
 
-                class Enemy(pygame.sprite.Sprite):
+                class Grass_1(pygame.sprite.Sprite):
                     """ Wall the player can run into. """
                     def __init__(self, x, y, width, height):
                         """ Constructor for the wall that the player can run into. """
@@ -837,6 +837,19 @@ class battle(tk.Frame):
                                                
  
                         # Make our top-left corner the passed-in location.
+                        self.rect = self.image.get_rect()
+                        self.rect.y = y
+                        self.rect.x = x
+
+                class Grass_2(pygame.sprite.Sprite):
+                    """ Wall the player can run into. """
+                    def __init__(self, x, y, width, height):
+                        #call parent constructor
+                        super().__init__()
+
+                        self.image = pygame.Surface([width, height])
+                        self.image = pygame.image.load("grass.png")
+
                         self.rect = self.image.get_rect()
                         self.rect.y = y
                         self.rect.x = x
@@ -881,7 +894,11 @@ class battle(tk.Frame):
  
                 all_sprite_list.add(player)
 
-                enemy = Enemy(100, 100, 10, 10)
+                enemy = Grass_1(100, 100, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Grass_2(140, 100, 10, 10)
                 enemy_list.add(enemy)
                 all_sprite_list.add(enemy)
 
