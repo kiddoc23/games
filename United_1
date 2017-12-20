@@ -49,13 +49,12 @@ LARGE_FONT = ("Verdana", 12)
 #Every varible must be definded as 0 up here and globaled or definded as " "
 
 
-
 global Char_stats, Squit_stats, Duld_stats, f_pok, fpokstats, duld, char, squirt, damage_taken, defence_gained, damage_given, defense_earned, level
 #global all pokemon stats might be able to put all pokemon in on array?
 level = 5
 Char_specail = ['Ember', 25, 25, 5]
 Char_stats = {'Name': 'Charzard', 'Attack' : 17.5, 'Defense' : 2.5, 'Health' : 35,'Type' : "Fire", 
-              'Specail' : Char_specail , 'Exp' : 0, 'MaxHealth' : 3.5, 'Level' : 10, 'Req' : 20, 'Pic' : """
+              'Specail' : Char_specail , 'Exp' : 0, 'MaxHealth' : 35, 'Level' : 10, 'Req' : 20, 'Pic' : """
                                                                                                     
                                                                                                     
                                  `.--.`                                                             
@@ -475,7 +474,7 @@ s+++++++++++++s+++++smhhdyo++++++/////////+++++ooossyy++++++++++++++++++osyyso++
 '''}
 Tree_specail = ['Leaves', 25, 20, 5]
 Tree_stats = {'Name': 'Treepo', 'Attack' : 17, 'Defense' : 5.4, 'Health' : 56,'Type' : "Grass",
-              'Specail' : Tree_specail, 'Exp' : 0, 'MaxHealth' : 56, 'Level' : 10, 'Req' : 20,'Pic' :'''
+              'Specail' : Tree_specail, 'Exp' : 0, 'MaxHealth' : 40, 'Level' : 10, 'Req' : 20,'Pic' :'''
 
 
                                                       .::/:`    `.:::-                              
@@ -528,6 +527,8 @@ f_pok = ""
 fpokstats = 0
 stats_gained = {'damage_taken' : 0, 'defence_gained' : 0, 'damage_given' : 0, 'defense_earned' : 0, 'health_gained' : 0,
                 'Attack' : 0, 'Defense' : 0, 'Health' : 0, 'MaxHealth' : 0, }
+own_poke = []
+all_poke = []
 
 class main(tk.Tk): #This is required for tkinter if you want to have the windows one behind another
     def __init__(self, *args, **kwargs):
@@ -576,6 +577,8 @@ class Game(tk.Frame):
         def f_Char():#could do \/
             global f_pok, fpokstats, opstats, op
             fpokstats = Char_stats
+            own_poke.extend(Char_stats)
+            all_poke.append(Char_stats['Name'])
             f_pok = "Charlizard"
             print(f_pok,"Health {0}, Attack {1}, Defense {2}, {3} Type".format(fpokstats['Health'], fpokstats['Attack']
                                                                                , fpokstats['Defense'], fpokstats['Type']))
@@ -594,6 +597,8 @@ class Game(tk.Frame):
             fpokstats = Squit_stats
             f_pok = "Squirtale"
             op = "Charlizard"
+            own_poke.extend(Squit_stats)
+            all_poke.append(Squit_stats['Name']))
             opstats = Char_stats
             print(f_pok, "Health {0}, Attack {1}, Defense {2}, {3} Type".format(fpokstats['Health'], fpokstats['Attack']
                                                                           , fpokstats['Defense'], fpokstats['Type']))
@@ -607,6 +612,9 @@ class Game(tk.Frame):
         def f_Duld():
             global f_pok, fpokstats, opstats, op
             fpokstats = Duld_stats
+            own_poke.append(Duld_stats)
+            all_poke.append(Duld_stats['Name'])
+            fpokstats = own_poke[0]
             f_pok = "Duldasuar"
             op = "Squirt"
             opstats = Squit_stats
@@ -618,7 +626,7 @@ class Game(tk.Frame):
             print("Your oppenent is", op)
             time.sleep(1)
             (self, controller.show_frame(battle))
-
+    
 class battle(tk.Frame):
 
     def __init__(self, parent, controller):
@@ -657,8 +665,8 @@ class battle(tk.Frame):
 
         def defend():
             global fpokstats, stats_gained
-            fpokstats['Defense'] = fpokstats['Defense'] + 1
-            stats_gained["defence_gained"] = stats_gained["defence_gained"] +1
+            fpokstats['Defense'] = fpokstats['Defense'] + 0.5
+            stats_gained["defence_gained"] = stats_gained["defence_gained"] +0.5
             print(fpokstats['Defense'], "defense")
             turn()
 
@@ -705,19 +713,39 @@ class battle(tk.Frame):
                 turn()
 
         def turn():
-            global damage_taken, stats_gained, opstats,fpokstats
+            global damage_taken, stats_gained, opstats,fpokstats, level
             
             if(opstats['Health'] <= 0):
                 fpokstats['Defense'] = fpokstats['Defense'] - stats_gained['defence_gained']
                 opstats['Health'] = opstats['Health'] + stats_gained['damage_given']
                 stats_gained['damage_given'] = 0
                 stats_gained['defence_gained'] = 0
-                fpokstats['Exp'] = fpokstats['Exp'] +7
+                fpokstats['Exp'] = fpokstats['Exp'] + opstats['Level']
+                opstats['Level'] = opstats['Level'] - level
+                opstats['MaxHealth'] = opstats['MaxHealth'] - stats_gained['MaxHealth']
+                opstats['Health'] = opstats['MaxHealth']
+                opstats['Attack'] = opstats['Attack'] - stats_gained['Attack']
+                stats_gained['MaxHealth'] = 0
+                stats_gained['Attack'] = 0
                 if(fpokstats['Exp'] >= fpokstats['Req']):
-                    fpokstats['MaxHealth'] = fpokstats['MaxHealth'] +2
-                    fpokstats['Level'] = fpokstats['Level'] +1
-                    fpokstats['Attack'] = fpokstats['Attack'] +2
-                    fpokstats['Defense'] = fpokstats['Defense'] +0.2
+                    if(fpokstats['Type'] == "Fire"):
+                        fpokstats['MaxHealth'] = fpokstats['MaxHealth'] +2
+                        fpokstats['Level'] = fpokstats['Level'] +1
+                        fpokstats['Attack'] = fpokstats['Attack'] +2
+                        fpokstats['Defense'] = fpokstats['Defense'] +0.2
+                        
+                    elif(fpokstats['Type'] == "Water"):
+                        fpokstats['MaxHealth'] = fpokstats['MaxHealth'] +1.5
+                        fpokstats['Level'] = fpokstats['Level'] +1
+                        fpokstats['Attack'] = fpokstats['Attack'] +1.4
+                        fpokstats['Defense'] = fpokstats['Defense'] +0.55
+                        
+                    elif(fpokstats['Type'] == "Grass"):
+                        fpokstats['MaxHealth'] = fpokstats['MaxHealth'] +2.5
+                        fpokstats['Level'] = fpokstats['Level'] +1
+                        fpokstats['Attack'] = fpokstats['Attack'] +0.1
+                        fpokstats['Defense'] = fpokstats['Defense'] +0.4
+                        
                     fpokstats['Exp'] = 0
                     fpokstats['Req'] = fpokstats['Req'] +10
                     print("------------------------------------------------------------")
@@ -841,19 +869,6 @@ class battle(tk.Frame):
                         self.rect = self.image.get_rect()
                         self.rect.y = y
                         self.rect.x = x
-
-                class Grass_2(pygame.sprite.Sprite):
-                    """ Wall the player can run into. """
-                    def __init__(self, x, y, width, height):
-                        #call parent constructor
-                        super().__init__()
-
-                        self.image = pygame.Surface([width, height])
-                        self.image = pygame.image.load("grass.png")
-
-                        self.rect = self.image.get_rect()
-                        self.rect.y = y
-                        self.rect.x = x
  
      
                 # Call this function so the Pygame library can initialize itself
@@ -899,9 +914,19 @@ class battle(tk.Frame):
                 enemy_list.add(enemy)
                 all_sprite_list.add(enemy)
 
-                enemy = Grass_2(140, 100, 10, 10)
+                enemy = Grass_1(130, 100, 10, 10)
                 enemy_list.add(enemy)
                 all_sprite_list.add(enemy)
+
+                enemy = Grass_1(160, 100, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+                enemy = Grass_1(190, 100, 10, 10)
+                enemy_list.add(enemy)
+                all_sprite_list.add(enemy)
+
+
 
                 
 
@@ -987,6 +1012,7 @@ class battle(tk.Frame):
                 print("\n\n", fpokstats['Name'], "now has", round(fpokstats['Health']),"Health")
 
             if(fpokstats['Health'] <= 0):
+                global fpokstats, opstats
                 fpokstats['Health'] = fpokstats['Health'] + stats_gained['damage_taken']
                 fpokstats['Health'] = fpokstats['Health'] - stats_gained['health_gained']
                 fpokstats['Defense'] = fpokstats['Defense'] - stats_gained['defence_gained']
@@ -1002,12 +1028,44 @@ class battle(tk.Frame):
 
         def new_battle():
             global opstats, level
-            level = random.randint(1,6)
-            op_pos = [Tor_stats, Osh_stats, Odd_stats, Cyn_stats, Tree_stats, Mud_stats]
-            x = random.randint(0, 5)
+            if(fpokstats['Level'] >= 15):
+                level = random.randint(6,20)
+                op_pos = [Tor_stats, Osh_stats, Odd_stats, Cyn_stats, Tree_stats, Mud_stats]
+                x = random.randint(0, 5)
+            else:
+                level = random.randint(1,4)
+                op_pos = [Tor_stats, Osh_stats, Odd_stats]
+                x = random.randint(0, 2)
             opstats = op_pos[x]
+            if(opstats['Type'] == "Fire"):
+                opstats['Attack'] = opstats['Attack'] +(opstats['Level']-10)*2
+                stats_gained['Attack'] =(opstats['Level']-10)*2
+                opstats['MaxHealth'] = opstats['MaxHealth'] +(opstats['Level']-10)*2
+                stats_gained['MaxHealth'] = (opstats['Level']-10)*2
+                opstats['Health'] = opstats['MaxHealth']
+                opstats['Defense'] = opstats['Defense'] +(opstats['Level']-10)*0.2
+                                                              
+            elif(opstats['Type'] == "Water"):
+                opstats['Attack'] = opstats['Attack'] +(opstats['Level']-10)*1.4
+                stats_gained['Attack'] =(opstats['Level']-10)*1.5
+                opstats['MaxHealth'] = opstats['MaxHealth'] +(opstats['Level']-10)*1.5
+                stats_gained['MaxHealth'] = (opstats['Level']-10)*2
+                opstats['Health'] = opstats['MaxHealth']
+                opstats['Defense'] = opstats['Defense'] +(opstats['Level']- 10)*0.55
+                        
+            elif(opstats['Type'] == "Grass"):
+                opstats['Attack'] = opstats['Attack'] +(opstats['Level']-10)*1
+                stats_gained['Attack'] =(opstats['Level']-10)*1
+                opstats['MaxHealth'] = opstats['MaxHealth'] +(opstats['Level']-10)*2.5
+                stats_gained['MaxHealth'] = (opstats['Level']-10)*2
+                opstats['Health'] = opstats['MaxHealth']
+                opstats['Defense'] = opstats['Defense'] +(opstats['Level']-10)*0.4
+                                                              
             print(opstats['Pic'])
+            print("Health", opstats['Health'], "Level",opstats['Level'])
             print("You found a random", opstats['Name'])
+            print("\n\n")
+            print("What ")
             
 
 
