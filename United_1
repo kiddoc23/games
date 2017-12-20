@@ -598,7 +598,7 @@ class Game(tk.Frame):
             f_pok = "Squirtale"
             op = "Charlizard"
             own_poke.extend(Squit_stats)
-            all_poke.append(Squit_stats['Name']))
+            all_poke.append(Squit_stats['Name'])
             opstats = Char_stats
             print(f_pok, "Health {0}, Attack {1}, Defense {2}, {3} Type".format(fpokstats['Health'], fpokstats['Attack']
                                                                           , fpokstats['Defense'], fpokstats['Type']))
@@ -1027,7 +1027,7 @@ class battle(tk.Frame):
                 (self, controller.show_frame(Game))
 
         def new_battle():
-            global opstats, level
+            global opstats, level, fpokstats
             if(fpokstats['Level'] >= 15):
                 level = random.randint(6,20)
                 op_pos = [Tor_stats, Osh_stats, Odd_stats, Cyn_stats, Tree_stats, Mud_stats]
@@ -1065,10 +1065,14 @@ class battle(tk.Frame):
             print("Health", opstats['Health'], "Level",opstats['Level'])
             print("You found a random", opstats['Name'])
             print("\n\n")
-            print("What ")
-            
-
-
+            print("What pokemon would you like to use ? ")
+            x = 0
+            for pokemon in all_poke:
+                print(x,".", all_poke[x])
+                x = x+1
+            x = int(input(":"))
+            fpokstats = own_poke[x]
+            fpokstats['Health'] = int(fpokstats['Health'])
 
 app = main() #These loops keep the app running none stop \/
 app.mainloop()
