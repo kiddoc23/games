@@ -54,8 +54,8 @@ global Char_stats, Squit_stats, Duld_stats, f_pok, fpokstats, duld, char, squirt
 #global all pokemon stats might be able to put all pokemon in on array?
 level = 5
 Char_specail = ['Ember', 25, 25, 5]
-Char_stats = {'Name': 'Charzard', 'Attack' : 10, 'Defense' : 1.5, 'Health' : 25,'Type' : "Fire", 
-              'Specail' : Char_specail , 'Exp' : 0, 'MaxHealth' : 25, 'Level' : 10, 'Req' : 20, 'Pic' : """
+Char_stats = {'Name': 'Charzard', 'Attack' : 17.5, 'Defense' : 2.5, 'Health' : 35,'Type' : "Fire", 
+              'Specail' : Char_specail , 'Exp' : 0, 'MaxHealth' : 3.5, 'Level' : 10, 'Req' : 20, 'Pic' : """
                                                                                                     
                                                                                                     
                                  `.--.`                                                             
@@ -112,8 +112,8 @@ Char_stats = {'Name': 'Charzard', 'Attack' : 10, 'Defense' : 1.5, 'Health' : 25,
 """}
 
 Squit_specail = ['Water Gun', 25, 20, 5]
-Squit_stats = {'Name': 'Squirtale', 'Attack' : 8, 'Defense' : 3.5, 'Health' : 25,'Type' : "Water",
-               'Specail' :Squit_specail, 'Exp' : 0, 'MaxHealth' : 25, 'Level' : 10, 'Req' : 20, 'Pic' : """
+Squit_stats = {'Name': 'Squirtale', 'Attack' : 15, 'Defense' : 5.25, 'Health' : 32.5,'Type' : "Water",
+               'Specail' :Squit_specail, 'Exp' : 0, 'MaxHealth' : 32.5, 'Level' : 10, 'Req' : 20, 'Pic' : """
                                 `..-----::-----..                                                   
                             ..-:--....-----------::-.                                               
                          `-:-..`....----------------::-`                                            
@@ -170,7 +170,7 @@ Squit_stats = {'Name': 'Squirtale', 'Attack' : 8, 'Defense' : 3.5, 'Health' : 25
 """}
 
 Duld_specail = ['Leaves', 25, 20, 5]
-Duld_stats = {'Name': 'Duldasuar', 'Attack' : 8, 'Defense' : 1.5, 'Health' : 35,'Type' : "Grass",
+Duld_stats = {'Name': 'Duldasuar', 'Attack' : 13, 'Defense' : 3.5, 'Health' : 47.5,'Type' : "Grass",
               'Specail' : Duld_specail, 'Exp' : 0, 'MaxHealth' : 35, 'Level' : 10, 'Req' : 20,'Pic' : """
 
                     y                                                                               
@@ -221,8 +221,8 @@ Nooooooooooooosssossyhhhyyyyyyh+:::/:::::::::ssss/  +ssy.    //:::::::::o+/:::::
              +-h  s+d   d            Nho/+:+://.-+o/`+                    hy    Nd                  
                                           +oNNo::d                                       """}
 
-Osh_stats = {'Name': 'Oshiwish', 'Attack' : 6, 'Defense' : 1, 'Health' : 25,'Type' : "Water",
-              'Exp' : 0, 'MaxHealth' : 25, 'Level' : level, 'Req' : 10,'Specail' :25, 'Pic' : """
+Osh_stats = {'Name': 'Oshiwish', 'Attack' : 20, 'Defense' : 6.5, 'Health' : 40,'Type' : "Water",
+              'Exp' : 0, 'MaxHealth' : 40, 'Level' : level, 'Req' : 10,'Specail' :25, 'Pic' : """
                               so++/   /+oss                                          
                          hs+/-.````   `````. o dN                                     
                     Nho-```                   ``-+hN                                  
@@ -272,8 +272,8 @@ Osh_stats = {'Name': 'Oshiwish', 'Attack' : 6, 'Defense' : 1, 'Health' : 25,'Typ
                      s                     soo+o+++oss   
 """}
 
-Odd_stats = {'Name': 'Oddush', 'Attack' : 6, 'Defense' : 1, 'Health' : 20,'Type' : "Grass",
-              'Exp' : 0, 'MaxHealth' : 20, 'Level' : level, 'Req' : 10,'Specail' : 25, 'Pic' : """
+Odd_stats = {'Name': 'Oddush', 'Attack' : 16, 'Defense' : 5, 'Health' : 50,'Type' : "Grass",
+              'Exp' : 0, 'MaxHealth' : 50, 'Level' : level, 'Req' : 10,'Specail' : 25, 'Pic' : """
  `.``                                                                                  
   .:////:-.                                                                            
     ./++++/:`                     ```..--                                              
@@ -317,8 +317,8 @@ Odd_stats = {'Name': 'Oddush', 'Attack' : 6, 'Defense' : 1, 'Health' : 20,'Type'
                      ...   
 """}
 
-Tor_stats = {'Name': 'Torchick', 'Attack' : 8, 'Defense' : 1, 'Health' : 20,'Type' : "Fire",
-              'Exp' : 0, 'MaxHealth' : 20, 'Level' : level, 'Req' : 10, 'Specail' :'Ember', 'Pic' : """
+Tor_stats = {'Name': 'Torchick', 'Attack' : 15.5, 'Defense' : 3, 'Health' : 30,'Type' : "Fire",
+              'Exp' : 0, 'MaxHealth' : 30, 'Level' : level, 'Req' : 10, 'Specail' :'Ember', 'Pic' : """
                                          s+:          
 										  
                                       Nh+-..                               
@@ -370,8 +370,8 @@ y s///:::::::::///////s+:os/////////////////
 """}
 
 Cyn_specail = ['Ember', 20, 25, 5]
-Cyn_stats = {'Name': 'cyndaquil ', 'Attack' : 9, 'Defense' : 1, 'Health' : 22,'Type' : "Fire",
-              'Exp' : 0, 'MaxHealth' : 22, 'Level' : level, 'Req' : 10, 'Specail' :Cyn_specail, 'Pic' :"""                                                                                                   
+Cyn_stats = {'Name': 'cyndaquil ', 'Attack' : 16.5, 'Defense' : 2, 'Health' : 32,'Type' : "Fire",
+              'Exp' : 0, 'MaxHealth' : 32, 'Level' : level, 'Req' : 10, 'Specail' :Cyn_specail, 'Pic' :"""                                                                                                   
                                            :.                                                       
                                            //.                                                      
                                            ///-                                                     
@@ -413,8 +413,8 @@ Cyn_stats = {'Name': 'cyndaquil ', 'Attack' : 9, 'Defense' : 1, 'Health' : 22,'T
                                    .:/o/:///`                                                       
 """}
 Mud_specail = ['Water Gun', 25, 20, 5]
-Mud_stats = {'Name': 'Mukdip', 'Attack' : 7, 'Defense' : 3, 'Health' : 22,'Type' : "Water",
-               'Specail' :Mud_specail, 'Exp' : 0, 'MaxHealth' : 22, 'Level' : 10, 'Req' : 20, 'Pic' : '''                                                                     
+Mud_stats = {'Name': 'Mukdip', 'Attack' : 21, 'Defense' : 8.5, 'Health' : 38,'Type' : "Water",
+               'Specail' :Mud_specail, 'Exp' : 0, 'MaxHealth' : 38, 'Level' : 10, 'Req' : 20, 'Pic' : '''                                                                     
 
                                      .ohysssdsssssssyy                                              
                                    .shssssssdssssssssm                                              
@@ -474,8 +474,8 @@ s+++++++++++++s+++++smhhdyo++++++/////////+++++ooossyy++++++++++++++++++osyyso++
                                                          /syydhyy/-
 '''}
 Tree_specail = ['Leaves', 25, 20, 5]
-Tree_stats = {'Name': 'Treepo', 'Attack' : 7, 'Defense' : 1.4, 'Health' : 31,'Type' : "Grass",
-              'Specail' : Tree_specail, 'Exp' : 0, 'MaxHealth' : 31, 'Level' : 10, 'Req' : 20,'Pic' :'''
+Tree_stats = {'Name': 'Treepo', 'Attack' : 17, 'Defense' : 5.4, 'Health' : 56,'Type' : "Grass",
+              'Specail' : Tree_specail, 'Exp' : 0, 'MaxHealth' : 56, 'Level' : 10, 'Req' : 20,'Pic' :'''
 
 
                                                       .::/:`    `.:::-                              
@@ -526,7 +526,8 @@ s++++ossooo+++oooossyyyyyysoooooo+/-`         `.:/://++++ooooy:.
 
 f_pok = ""
 fpokstats = 0
-stats_gained = {'damage_taken' : 0, 'defence_gained' : 0, 'damage_given' : 0, 'defense_earned' : 0, 'health_gained' : 0}
+stats_gained = {'damage_taken' : 0, 'defence_gained' : 0, 'damage_given' : 0, 'defense_earned' : 0, 'health_gained' : 0,
+                'Attack' : 0, 'Defense' : 0, 'Health' : 0, 'MaxHealth' : 0, }
 
 class main(tk.Tk): #This is required for tkinter if you want to have the windows one behind another
     def __init__(self, *args, **kwargs):
