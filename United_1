@@ -527,7 +527,7 @@ f_pok = ""
 fpokstats = 0
 stats_gained = {'damage_taken' : 0, 'defence_gained' : 0, 'damage_given' : 0, 'defense_earned' : 0, 'health_gained' : 0,
                 'Attack' : 0, 'Defense' : 0, 'Health' : 0, 'MaxHealth' : 0, }
-own_poke = []
+own_poke = {}
 all_poke = []
 
 class main(tk.Tk): #This is required for tkinter if you want to have the windows one behind another
@@ -577,7 +577,7 @@ class Game(tk.Frame):
         def f_Char():#could do \/
             global f_pok, fpokstats, opstats, op
             fpokstats = Char_stats
-            own_poke.extend(Char_stats)
+            own_poke[0] = (Char_stats)
             all_poke.append(Char_stats['Name'])
             f_pok = "Charlizard"
             print(f_pok,"Health {0}, Attack {1}, Defense {2}, {3} Type".format(fpokstats['Health'], fpokstats['Attack']
@@ -721,7 +721,7 @@ class battle(tk.Frame):
                 stats_gained['damage_given'] = 0
                 stats_gained['defence_gained'] = 0
                 fpokstats['Exp'] = fpokstats['Exp'] + opstats['Level']
-                opstats['Level'] = opstats['Level'] - level
+                opstats['Level'] = opstats['Level'] - level +5
                 opstats['MaxHealth'] = opstats['MaxHealth'] - stats_gained['MaxHealth']
                 opstats['Health'] = opstats['MaxHealth']
                 opstats['Attack'] = opstats['Attack'] - stats_gained['Attack']
@@ -1012,7 +1012,6 @@ class battle(tk.Frame):
                 print("\n\n", fpokstats['Name'], "now has", round(fpokstats['Health']),"Health")
 
             if(fpokstats['Health'] <= 0):
-                global fpokstats, opstats
                 fpokstats['Health'] = fpokstats['Health'] + stats_gained['damage_taken']
                 fpokstats['Health'] = fpokstats['Health'] - stats_gained['health_gained']
                 fpokstats['Defense'] = fpokstats['Defense'] - stats_gained['defence_gained']
@@ -1027,7 +1026,7 @@ class battle(tk.Frame):
                 (self, controller.show_frame(Game))
 
         def new_battle():
-            global opstats, level, fpokstats
+            global opstats, level, fpokstats, own_poke
             if(fpokstats['Level'] >= 15):
                 level = random.randint(6,20)
                 op_pos = [Tor_stats, Osh_stats, Odd_stats, Cyn_stats, Tree_stats, Mud_stats]
@@ -1068,11 +1067,11 @@ class battle(tk.Frame):
             print("What pokemon would you like to use ? ")
             x = 0
             for pokemon in all_poke:
-                print(x,".", all_poke[x])
+                print(x +1,".", all_poke[x])
                 x = x+1
             x = int(input(":"))
+            x = x-1
             fpokstats = own_poke[x]
-            fpokstats['Health'] = int(fpokstats['Health'])
 
 app = main() #These loops keep the app running none stop \/
 app.mainloop()
