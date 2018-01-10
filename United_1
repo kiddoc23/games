@@ -49,10 +49,10 @@ LARGE_FONT = ("Verdana", 12)
 #Every varible must be definded as 0 up here and globaled or definded as " "
 
 
-global Char_stats, Squit_stats, Duld_stats, f_pok, fpokstats, duld, char, squirt, damage_taken, defence_gained, damage_given, defense_earned, level
+global Char_stats, Squit_stats, Duld_stats, f_pok, fpokstats, duld, char, squirt, damage_taken, defence_gained, damage_given, defense_earned, level, pokemon
 #global all pokemon stats might be able to put all pokemon in on array?
 level = 5
-Char_specail = ['Ember', 25, 25, 5]
+Char_specail = {'Name' : 'Ember', 'Attack' : 25,'AP' : 25, 'Weak' : 5, 'APMax' : 25}
 Char_stats = {'Name': 'Charzard', 'Attack' : 17.5, 'Defense' : 2.5, 'Health' : 35,'Type' : "Fire", 
               'Specail' : Char_specail , 'Exp' : 0, 'MaxHealth' : 35, 'Level' : 10, 'Req' : 20, 'Pic' : """
                                                                                                     
@@ -110,7 +110,7 @@ Char_stats = {'Name': 'Charzard', 'Attack' : 17.5, 'Defense' : 2.5, 'Health' : 3
                                                   -:: -. .-`     
 """}
 
-Squit_specail = ['Water Gun', 25, 20, 5]
+Squit_specail = {'Name' : 'Water Gun', 'AP' : 25,'Attack' : 20,'Weak' : 5, 'APMax' : 25}
 Squit_stats = {'Name': 'Squirtale', 'Attack' : 15, 'Defense' : 5.25, 'Health' : 32.5,'Type' : "Water",
                'Specail' :Squit_specail, 'Exp' : 0, 'MaxHealth' : 32.5, 'Level' : 10, 'Req' : 20, 'Pic' : """
                                 `..-----::-----..                                                   
@@ -168,7 +168,7 @@ Squit_stats = {'Name': 'Squirtale', 'Attack' : 15, 'Defense' : 5.25, 'Health' : 
                                                           .---     
 """}
 
-Duld_specail = ['Leaves', 25, 20, 5]
+Duld_specail = {'Name' : 'Leaves', 'AP' : 25, 'Attack' : 20, 'Weak' : 5, 'APMax' : 25}
 Duld_stats = {'Name': 'Duldasuar', 'Attack' : 13, 'Defense' : 3.5, 'Health' : 47.5,'Type' : "Grass",
               'Specail' : Duld_specail, 'Exp' : 0, 'MaxHealth' : 35, 'Level' : 10, 'Req' : 20,'Pic' : """
 
@@ -528,6 +528,7 @@ fpokstats = 0
 stats_gained = {'damage_taken' : 0, 'defence_gained' : 0, 'damage_given' : 0, 'defense_earned' : 0, 'health_gained' : 0,
                 'Attack' : 0, 'Defense' : 0, 'Health' : 0, 'MaxHealth' : 0, }
 own_poke = {}
+pokemon = 0
 all_poke = []
 
 class main(tk.Tk): #This is required for tkinter if you want to have the windows one behind another
@@ -575,9 +576,11 @@ class Game(tk.Frame):
         button3.config(height = 3, width = 10)
 
         def f_Char():#could do \/
-            global f_pok, fpokstats, opstats, op
+            global f_pok, fpokstats, opstats, op, pokemon, own_poke
+            own_poke = {}
             fpokstats = Char_stats
-            own_poke[0] = (Char_stats)
+            own_poke[pokemon] = (Char_stats)
+            pokemon +1
             all_poke.append(Char_stats['Name'])
             f_pok = "Charlizard"
             print(f_pok,"Health {0}, Attack {1}, Defense {2}, {3} Type".format(fpokstats['Health'], fpokstats['Attack']
@@ -593,11 +596,13 @@ class Game(tk.Frame):
             #input = (show_frame(battle)) doesn't work
     
         def f_Squirt():
-            global f_pok, fpokstats, opstats, op
+            global f_pok, fpokstats, opstats, op, pokemon, own_poke
+            own_poke = {}
             fpokstats = Squit_stats
+            own_poke[pokemon] = (Squit_stats)
+            pokemon +1
             f_pok = "Squirtale"
             op = "Charlizard"
-            own_poke.extend(Squit_stats)
             all_poke.append(Squit_stats['Name'])
             opstats = Char_stats
             print(f_pok, "Health {0}, Attack {1}, Defense {2}, {3} Type".format(fpokstats['Health'], fpokstats['Attack']
@@ -610,9 +615,11 @@ class Game(tk.Frame):
             (self, controller.show_frame(battle))
             
         def f_Duld():
-            global f_pok, fpokstats, opstats, op
+            global f_pok, fpokstats, opstats, op, pokemon, own_poke
+            own_poke = {}
             fpokstats = Duld_stats
-            own_poke.append(Duld_stats)
+            own_poke[pokemon] = (Duld_stats)
+            pokemon +1
             all_poke.append(Duld_stats['Name'])
             fpokstats = own_poke[0]
             f_pok = "Duldasuar"
@@ -676,28 +683,24 @@ class battle(tk.Frame):
                 if(opstats['Type'] == "Fire" and fpokstats['Type'] == "Water" or
                    opstats['Type'] == "Water" and fpokstats['Type'] == "Grass" or
                    opstats['Type'] == "Grass" and fpokstats['Type'] == "Fire"):
-                    fpokstats['Attack'] = fpokstats['Specail'] [2] + 5
-                    fpokstats['Attack'] = fpokstats['Specail'] [2]/opstats['Defense']
-                    opstats['Health'] = opstats['Health'] - fpokstats['Attack']
-                    stats_gained["damage_given"] = stats_gained["damage_given"] + fpokstats['Attack']
-                    print(fpokstats['Specail'] [0], "did", fpokstats["Attack"], "damage. IT WAS SUPER EFFECTIVE!")
-                    fpokstats['Attack'] = fpokstats['Specail'] [2]*opstats['Defense']
-                    fpokstats['Attack'] = fpokstats['Specail'] [2] - 5
+                    fpokstats ['Specail'] ['Attack'] = fpokstats['Specail'] ['Attack']/opstats['Defense']
+                    opstats['Health'] = opstats['Health'] - fpokstats['Specail'] ['Attack']
+                    stats_gained["damage_given"] = stats_gained["damage_given"] + fpokstats['Specail'] ['Attack']
+                    print(fpokstats['Specail'] ['Name'], "did", fpokstats["Attack"], "damage. IT WAS SUPER EFFECTIVE!")
+                    fpokstats['Attack'] = fpokstats['Specail'] ['Attack']*opstats['Defense']
                 elif(opstats['Type'] == fpokstats['Type']):
-                    fpokstats['Attack'] = fpokstats['Specail'] [3]/opstats['Defense']
-                    opstats['Health'] = opstats['Health'] - fpokstats['Attack']
+                    fpokstats['Specail']['Attack'] = fpokstats['Specail'] ['Attack']/opstats['Defense']
+                    opstats['Health'] = opstats['Health'] - fpokstats['Specail'] ['Attack']
                     stats_gained['damage_given'] = stats_gained['damage_given'] + fpokstats['Attack']
-                    print(fpokstats['Specail'] [0], "did", fpokstats['Attack'], "damage. IT WASN'T EFFECTIVE!")
-                    fpokstats['Attack'] = fpokstats['Specail'] [3]*opstats['Defense']
+                    print(fpokstats['Specail'] ['Name'], "did", fpokstats['Attack'], "damage. IT WASN'T EFFECTIVE!")
+                    fpokstats['Specail']['Attack'] = fpokstats['Specail'] ['Attack']*opstats['Defense']
                 else:
-                    fpokstats['Attack'] = fpokstats['Specail'] [3] - 5
-                    fpokstats['Attack'] = fpokstats['Specail'] [3]/opstats['Defense']
-                    opstats['Health'] = opstats['Health'] - fpokstats['Attack']
-                    stats_gained['damage_given'] = stats_gained['damage_given'] + fpokstats['Attack']
-                    print(fpokstats['Specail'] [0],"did", fpokstats['Attack'], "damage. IT WASN'T EFFECTIVE!")
-                    fpokstats['Attack'] = fpokstats['Specail'] [3]*opstats['Defense']
-                    fpokstats['Attack'] = fpokstats['Specail'] [3] + 5
-                fpokstats['Specail'] [1] = fpokstats['Specail'] [1] -1
+                    fpokstats['Specail']['Weak'] = fpokstats['Specail'] ['Weak']/opstats['Defense']
+                    opstats['Health'] = opstats['Health'] - fpokstats['Specail']['Weak']
+                    stats_gained['damage_given'] = stats_gained['damage_given'] + fpokstats['Specail']['Weak']
+                    print(fpokstats['Specail'] ['Name'],"did", fpokstats['Attack'], "damage. IT WASN'T EFFECTIVE!")
+                    fpokstats['Specail']['Weak'] = fpokstats['Specail'] ['Weak']*opstats['Defense']
+                fpokstats['Specail'] ['AP'] = fpokstats['Specail'] ['AP'] -1
                 print(opstats['Name'], "now has", round(opstats['Health']), "HP")
                 turn()
 
