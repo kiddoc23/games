@@ -576,8 +576,9 @@ class Game(tk.Frame):
         button3.config(height = 3, width = 10)
 
         def f_Char():#could do \/
-            global f_pok, fpokstats, opstats, op, pokemon, own_poke
-            own_poke = {}
+            global f_pok, fpokstats, opstats, op, pokemon, own_poke, all_poke
+            pokemon = 0
+            all_poke = []
             fpokstats = Char_stats
             own_poke[pokemon] = (Char_stats)
             pokemon +1
@@ -596,8 +597,9 @@ class Game(tk.Frame):
             #input = (show_frame(battle)) doesn't work
     
         def f_Squirt():
-            global f_pok, fpokstats, opstats, op, pokemon, own_poke
-            own_poke = {}
+            global f_pok, fpokstats, opstats, op, pokemon, own_poke, all_poke
+            pokemon = 0
+            all_poke = []
             fpokstats = Squit_stats
             own_poke[pokemon] = (Squit_stats)
             pokemon +1
@@ -615,8 +617,9 @@ class Game(tk.Frame):
             (self, controller.show_frame(battle))
             
         def f_Duld():
-            global f_pok, fpokstats, opstats, op, pokemon, own_poke
-            own_poke = {}
+            global f_pok, fpokstats, opstats, op, pokemon, own_poke, all_poke
+            pokemon = 0
+            all_poke = []
             fpokstats = Duld_stats
             own_poke[pokemon] = (Duld_stats)
             pokemon +1
@@ -663,10 +666,10 @@ class battle(tk.Frame):
 
         def attack():
             global opstats, stats_gained
-            fpokstats['Attack'] = fpokstats['Attack'] - opstats['Defense']
+            fpokstats['Attack'] = fpokstats['Attack']/opstats['Defense']
             opstats['Health'] = opstats['Health'] - fpokstats['Attack']
             stats_gained["damage_given"] = stats_gained["damage_given"] + fpokstats['Attack']
-            fpokstats['Attack'] = fpokstats['Attack'] + opstats['Defense']
+            fpokstats['Attack'] = fpokstats['Attack']*opstats['Defense']
             print(opstats['Name'], "now has", round(opstats['Health']), "Hp")
             turn()
 
@@ -679,15 +682,15 @@ class battle(tk.Frame):
 
         def specail():
             global fpokstats, stats_gained, damage_given
-            if(fpokstats['Specail'] [1] >=1):
+            if(fpokstats['Specail'] ['AP'] >=1):
                 if(opstats['Type'] == "Fire" and fpokstats['Type'] == "Water" or
                    opstats['Type'] == "Water" and fpokstats['Type'] == "Grass" or
                    opstats['Type'] == "Grass" and fpokstats['Type'] == "Fire"):
                     fpokstats ['Specail'] ['Attack'] = fpokstats['Specail'] ['Attack']/opstats['Defense']
                     opstats['Health'] = opstats['Health'] - fpokstats['Specail'] ['Attack']
                     stats_gained["damage_given"] = stats_gained["damage_given"] + fpokstats['Specail'] ['Attack']
-                    print(fpokstats['Specail'] ['Name'], "did", fpokstats["Attack"], "damage. IT WAS SUPER EFFECTIVE!")
-                    fpokstats['Attack'] = fpokstats['Specail'] ['Attack']*opstats['Defense']
+                    print(fpokstats['Specail'] ['Name'], "did", fpokstats["Specail"] ['Attack'], "damage. IT WAS SUPER EFFECTIVE!")
+                    fpokstats['Specail'] ['Attack'] = fpokstats['Specail'] ['Attack']*opstats['Defense']
                 elif(opstats['Type'] == fpokstats['Type']):
                     fpokstats['Specail']['Attack'] = fpokstats['Specail'] ['Attack']/opstats['Defense']
                     opstats['Health'] = opstats['Health'] - fpokstats['Specail'] ['Attack']
@@ -730,6 +733,7 @@ class battle(tk.Frame):
                 opstats['Attack'] = opstats['Attack'] - stats_gained['Attack']
                 stats_gained['MaxHealth'] = 0
                 stats_gained['Attack'] = 0
+                fpokstats['Specail'] ['AP'] = fpokstats ['Specail'] ['APMax']
                 if(fpokstats['Exp'] >= fpokstats['Req']):
                     if(fpokstats['Type'] == "Fire"):
                         fpokstats['MaxHealth'] = fpokstats['MaxHealth'] +2
@@ -872,6 +876,22 @@ class battle(tk.Frame):
                         self.rect = self.image.get_rect()
                         self.rect.y = y
                         self.rect.x = x
+
+                class Heal(pygame.sprite.Sprite):
+                    def __init__(self, x, y, width, height):
+                        """ Constructor for the wall that the player can run into. """
+                        # Call the parent's constructor
+                        super().__init__()
+ 
+                        # Make a blue wall, of the size specified inpygame.quit() the parameters
+                        self.image = pygame.Surface([width, height])
+                        self.image = pygame.image.load("grass.png")
+                                               
+ 
+                        # Make our top-left corner the passed-in location.
+                        self.rect = self.image.get_rect()
+                        self.rect.y = y
+                        self.rect.x = x
  
      
                 # Call this function so the Pygame library can initialize itself
@@ -976,33 +996,13 @@ class battle(tk.Frame):
                 pygame.quit()
 ############################################################################################################################################################
                 
-            elif(fpokstats['Type'] == "Fire" and opstats['Type'] == "Water" and fpokstats['Health'] >= 10):		
-                opstats['Attack'] = opstats['Attack'] + 5
+            elif(fpokstats['Type'] == "Fire" and opstats['Type'] == "Water" and fpokstats['Health'] >= 10 or
+                 fpokstats['Type'] == "Water" and opstats['Type'] == "Grass" and fpokstats['Health'] >= 10 or
+                 fpokstats['Type'] == "Grass" and opstats['Type'] == "Fire" and fpokstats['Health'] >= 10):		
                 opstats['Attack'] = opstats['Attack']/fpokstats['Defense']
                 fpokstats['Health'] = fpokstats['Health'] - opstats['Attack']
                 stats_gained["damage_taken"] = stats_gained["damage_taken"] + opstats['Attack']
                 opstats['Attack'] = opstats['Attack']*fpokstats['Defense']
-                opstats['Attack'] = opstats['Attack'] - 5
-                print(opstats["Name"] ,"used his specail")
-                print("\n\n", fpokstats['Name'], "now has", round(fpokstats['Health']),"Health")
-
-            elif(fpokstats['Type'] == "Water" and opstats['Type'] == "Grass" and fpokstats['Health'] >= 10):		
-                opstats['Attack'] = opstats['Attack'] + 5
-                opstats['Attack'] = opstats['Attack']/fpokstats['Defense']
-                fpokstats['Health'] = fpokstats['Health'] - opstats['Attack']
-                stats_gained["damage_taken"] = stats_gained["damage_taken"] + opstats['Attack']
-                opstats['Attack'] = opstats['Attack']*fpokstats['Defense']
-                opstats['Attack'] = opstats['Attack'] - 5
-                print(opstats["Name"] ,"used his specail")
-                print("\n\n", fpokstats['Name'], "now has", round(fpokstats['Health']),"Health")
-
-            elif(fpokstats['Type'] == "Grass" and opstats['Type'] == "Fire" and fpokstats['Health'] >= 10):		
-                opstats['Attack'] = opstats['Attack'] + 5
-                opstats['Attack'] = opstats['Attack']/fpokstats['Defense']
-                fpokstats['Health'] = fpokstats['Health'] - opstats['Attack']
-                stats_gained["damage_taken"] = stats_gained["damage_taken"] + opstats['Attack']
-                opstats['Attack'] = opstats['Attack']*fpokstats['Defense']
-                opstats['Attack'] = opstats['Attack'] - 5
                 print(opstats["Name"] ,"used his specail")
                 print("\n\n", fpokstats['Name'], "now has", round(fpokstats['Health']),"Health")
                 
@@ -1022,11 +1022,11 @@ class battle(tk.Frame):
                 stats_gained['damage_given'] = 0
                 stats_gained['damage_taken'] = 0
                 stats_gained['defence_gained'] = 0
-                fpokstats['Specail'] = 25
+                fpokstats['Specail']['AP'] = fpokstats['Specail'] ['APMax']
                 fpokstats['Health'] = fpokstats['MaxHealth']
                 print("You lost!")
                 print("GAME OVER!")
-                (self, controller.show_frame(Game))
+                self, controller.show_frame(Game)
 
         def new_battle():
             global opstats, level, fpokstats, own_poke
@@ -1035,7 +1035,7 @@ class battle(tk.Frame):
                 op_pos = [Tor_stats, Osh_stats, Odd_stats, Cyn_stats, Tree_stats, Mud_stats]
                 x = random.randint(0, 5)
             else:
-                level = random.randint(1,4)
+                level = random.randint(2,5)
                 op_pos = [Tor_stats, Osh_stats, Odd_stats]
                 x = random.randint(0, 2)
             opstats = op_pos[x]
@@ -1074,7 +1074,13 @@ class battle(tk.Frame):
                 x = x+1
             x = int(input(":"))
             x = x-1
-            fpokstats = own_poke[x]
+            while(fpokstats != own_poke[x]):
+                try:
+                    fpokstats = own_poke[x]
+                except KeyError:
+                    print("That wasn't in range")
+                x = int(input(":"))
+                x = x-1
 
 app = main() #These loops keep the app running none stop \/
 app.mainloop()
