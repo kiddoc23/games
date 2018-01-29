@@ -790,6 +790,7 @@ class battle(tk.Frame):
                         self.change_y = 0
                         self.walls = None
                         self.enemy = None
+                        self.heal = None
  
                     def changespeed(self, x, y):
                         """ Change the speed of the player. """
@@ -820,6 +821,10 @@ class battle(tk.Frame):
                                 running = False
                                 pygame.quit()
                                 sys.exit()
+
+                        block_hit_list = pygame.sprite.spritecollide(self, self.heal, False)
+                        for block in block_hit_list:
+                            print("heal")
                  
                         # Move up/down
                         self.rect.y += self.change_y
@@ -842,6 +847,10 @@ class battle(tk.Frame):
                                 running = False
                                 pygame.quit()
                                 sys.exit()
+
+                        block_hit_list = pygame.sprite.spritecollide(self, self.heal, False)
+                        for block in block_hit_list:
+                            ownpoke {0} {'Health'} = ownpoke {0} {MaxHealth}
  
  
                 class Wall(pygame.sprite.Sprite):
@@ -877,21 +886,7 @@ class battle(tk.Frame):
                         self.rect.y = y
                         self.rect.x = x
 
-                class Heal(pygame.sprite.Sprite):
-                    def __init__(self, x, y, width, height):
-                        """ Constructor for the wall that the player can run into. """
-                        # Call the parent's constructor
-                        super().__init__()
- 
-                        # Make a blue wall, of the size specified inpygame.quit() the parameters
-                        self.image = pygame.Surface([width, height])
-                        self.image = pygame.image.load("grass.png")
-                                               
- 
-                        # Make our top-left corner the passed-in location.
-                        self.rect = self.image.get_rect()
-                        self.rect.y = y
-                        self.rect.x = x
+                
 
                 class PokemonCentre(pygame.sprite.Sprite):
                     #Pokemon centre code
@@ -899,6 +894,7 @@ class battle(tk.Frame):
                         #Call initialiser
                         super().__init__()
                         #Get image
+                        self.image = pygame.Surface([width, height])
                         self.image = pygame.image.load("pokeCentEXT.png")
                         #Make top left corner passed in location
                         self.rect = self.image.get_rect()
@@ -921,6 +917,7 @@ class battle(tk.Frame):
                 # Make the walls. (x_pos, y_pos, width, height)
                 wall_list = pygame.sprite.Group()
                 enemy_list = pygame.sprite.Group()
+                heal_list = pygame.sprite.Group()
  
                 wall = Wall(0, 0, 10, 600)
                 wall_list.add(wall)
@@ -942,6 +939,7 @@ class battle(tk.Frame):
                 player = Player(50, 50)
                 player.enemy = enemy_list
                 player.walls = wall_list
+                player.heal = heal_list
  
                 all_sprite_list.add(player)
 
@@ -961,9 +959,9 @@ class battle(tk.Frame):
                 enemy_list.add(enemy)
                 all_sprite_list.add(enemy)
 
-                enemy = PokemonCentre(200, 200, 60, 53)
-                enemy_list.add(enemy)
-                all_sprite_list.add(enemy)
+                heal = PokemonCentre(200, 200, 60, 53)
+                heal_list.add(heal)
+                all_sprite_list.add(heal)
 
 
 
