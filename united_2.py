@@ -49,7 +49,8 @@ LARGE_FONT = ("Verdana", 12)
 #Every varible must be definded as 0 up here and globaled or definded as " "
 
 
-global Char_stats, Squit_stats, Duld_stats, f_pok, fpokstats, duld, char, squirt, damage_taken, defence_gained, damage_given, defense_earned, level, pokemon
+global Char_stats, Squit_stats, Duld_stats, f_pok, fpokstats, duld, char, squirt, damage_taken, defence_gained
+global damage_given,defense_earned, level, pokemon, own_poke
 #global all pokemon stats might be able to put all pokemon in on array?
 level = 5
 Char_specail = {'Name' : 'Ember', 'Attack' : 25,'AP' : 25, 'Weak' : 5, 'APMax' : 25}
@@ -824,7 +825,7 @@ class battle(tk.Frame):
 
                         block_hit_list = pygame.sprite.spritecollide(self, self.heal, False)
                         for block in block_hit_list:
-                            print("heal")
+                            own_poke[0] ['Health'] = ownpoke [0] ['MaxHealth']
                  
                         # Move up/down
                         self.rect.y += self.change_y
@@ -850,7 +851,7 @@ class battle(tk.Frame):
 
                         block_hit_list = pygame.sprite.spritecollide(self, self.heal, False)
                         for block in block_hit_list:
-                            ownpoke {0} {'Health'} = ownpoke {0} {MaxHealth}
+                            own_poke[0] ['Health'] = ownpoke [0] ['MaxHealth']
  
  
                 class Wall(pygame.sprite.Sprite):
