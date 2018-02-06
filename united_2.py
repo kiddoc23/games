@@ -825,7 +825,17 @@ class battle(tk.Frame):
 
                         block_hit_list = pygame.sprite.spritecollide(self, self.heal, False)
                         for block in block_hit_list:
-                            own_poke[0] ['Health'] = ownpoke [0] ['MaxHealth']
+                            for num in own_poke:
+                                own_poke[num] ['Health'] = ownpoke [num] ['MaxHealth']
+                                print("Healing")
+                                time.sleep(1)
+                            print("Healed")
+
+                            if self.change_x > 0:
+                                self.rect.right = block.rect.left
+                            else:
+                                # Otherwise if we are moving left, do the opposite.
+                                self.rect.left = block.rect.right
                  
                         # Move up/down
                         self.rect.y += self.change_y
@@ -850,8 +860,16 @@ class battle(tk.Frame):
                                 sys.exit()
 
                         block_hit_list = pygame.sprite.spritecollide(self, self.heal, False)
-                        for block in block_hit_list:
-                            own_poke[0] ['Health'] = ownpoke [0] ['MaxHealth']
+                            for num in own_poke:
+                                own_poke[num] ['Health'] = ownpoke [num] ['MaxHealth']
+                                print("Healing")
+                                time.sleep(1)
+                            print("Healed")
+
+                            if self.change_y > 0:
+                                self.rect.bottom = block.rect.top
+                            else:
+                                self.rect.top = block.rect.bottom
  
  
                 class Wall(pygame.sprite.Sprite):
