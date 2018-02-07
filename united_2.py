@@ -577,12 +577,12 @@ class Game(tk.Frame):
         button3.config(height = 3, width = 10)
 
         def f_Char():#could do \/
-            global f_pok, fpokstats, opstats, op, pokemon, own_poke, all_poke
+            global f_pok, fpokstats, opstats, op, pokemon, own_poke, all_poke, op_pos, x
             pokemon = 0
             all_poke = []
             fpokstats = Char_stats
             own_poke[pokemon] = (Char_stats)
-            pokemon +1
+            pokemon = pokemon +1
             all_poke.append(Char_stats['Name'])
             f_pok = "Charlizard"
             print(f_pok,"Health {0}, Attack {1}, Defense {2}, {3} Type".format(fpokstats['Health'], fpokstats['Attack']
@@ -591,6 +591,8 @@ class Game(tk.Frame):
             print(fpokstats['Pic'])
             time.sleep(2)
             op = "Duldasuar"
+            op_pos = [Duld_stats]
+            x = 0
             opstats = Duld_stats
             print("Your oppenent is", op)
             time.sleep(1)
@@ -598,12 +600,12 @@ class Game(tk.Frame):
             #input = (show_frame(battle)) doesn't work
     
         def f_Squirt():
-            global f_pok, fpokstats, opstats, op, pokemon, own_poke, all_poke
+            global f_pok, fpokstats, opstats, op, pokemon, own_poke, all_poke, op_pos, x
             pokemon = 0
             all_poke = []
             fpokstats = Squit_stats
             own_poke[pokemon] = (Squit_stats)
-            pokemon +1
+            pokemon = pokemon+1
             f_pok = "Squirtale"
             op = "Charlizard"
             all_poke.append(Squit_stats['Name'])
@@ -613,17 +615,19 @@ class Game(tk.Frame):
             time.sleep(1)
             print(fpokstats['Pic'])
             time.sleep(2)
+            x = 0
+            op_pos = [Duld_stats]
             print("Your oppenent is", op)
             time.sleep(1)
             (self, controller.show_frame(battle))
             
         def f_Duld():
-            global f_pok, fpokstats, opstats, op, pokemon, own_poke, all_poke
+            global f_pok, fpokstats, opstats, op, pokemon, own_poke, all_poke, op_pos, x
             pokemon = 0
             all_poke = []
             fpokstats = Duld_stats
             own_poke[pokemon] = (Duld_stats)
-            pokemon +1
+            pokemon = pokemon +1
             all_poke.append(Duld_stats['Name'])
             fpokstats = own_poke[0]
             f_pok = "Duldasuar"
@@ -634,6 +638,8 @@ class Game(tk.Frame):
             time.sleep(1)
             print(fpokstats['Pic'])
             time.sleep(2)
+            x = 0
+            op_pos = [Duld_stats]
             print("Your oppenent is", op)
             time.sleep(1)
             (self, controller.show_frame(battle))
@@ -660,8 +666,8 @@ class battle(tk.Frame):
         button3.grid(row=2, column=0)
         button3.config(height = 3, width = 10)
 
-        button4 = tk.Button(self, text="Heal", font = LARGE_FONT,
-                            command=lambda: heal())
+        button4 = tk.Button(self, text="Catch", font = LARGE_FONT,
+                            command=lambda: catch())
         button4.grid(row=2, column=1)
         button4.config(height = 3, width = 10)
 
@@ -711,13 +717,27 @@ class battle(tk.Frame):
             else:
                 print("You don't have any specail move points left!")
 
-        def heal():
-            global fpokstats
-            if(fpokstats['Health'] >= fpokstats['MaxHealth']):
-                print("You can't have moret than", fpokstats['MaxHealth'])
+        def catch():
+            global fpokstats, op_pos, x
+            dice = random.randint(1, 100)
+            escape_prob = opstats['Health'] / opstats['MaxHealth'] *100
+            escape_prob = int(escape_prob)
+            if(escape_prob == 100):
+                print(opstats['Name'],"escaped!")
             else:
-                fpokstats['Health'] = fpokstats['Health'] + random.randint(1,3)
+                for escape_prob in range(0, 99):
+                    catch = random.randint(1,100)
+                    if(catch == dice):
+                        print("Not caught")
+                    else:
+                        print("Caught")
+                        own_poke[pokemon] = op_pos[x]
+                        opstats['Health'] = 0
+                        all_poke.append(opstats['Name'])
+                        turn()
                 turn()
+                    
+            
 
         def turn():
             global damage_taken, stats_gained, opstats,fpokstats, level
@@ -826,7 +846,7 @@ class battle(tk.Frame):
                         block_hit_list = pygame.sprite.spritecollide(self, self.heal, False)
                         for block in block_hit_list:
                             for num in own_poke:
-                                own_poke[num] ['Health'] = ownpoke [num] ['MaxHealth']
+                                own_poke[num] ['Health'] = own_poke [num] ['MaxHealth']
                                 print("Healing")
                                 time.sleep(1)
                             print("Healed")
@@ -860,8 +880,9 @@ class battle(tk.Frame):
                                 sys.exit()
 
                         block_hit_list = pygame.sprite.spritecollide(self, self.heal, False)
+                        for block in block_hit_list:
                             for num in own_poke:
-                                own_poke[num] ['Health'] = ownpoke [num] ['MaxHealth']
+                                own_poke[num] ['Health'] = own_poke [num] ['MaxHealth']
                                 print("Healing")
                                 time.sleep(1)
                             print("Healed")
@@ -1062,7 +1083,7 @@ class battle(tk.Frame):
                 self, controller.show_frame(Game)
 
         def new_battle():
-            global opstats, level, fpokstats, own_poke
+            global opstats, level, fpokstats, own_poke, op_pos, x
             if(fpokstats['Level'] >= 15):
                 level = random.randint(6,20)
                 op_pos = [Tor_stats, Osh_stats, Odd_stats, Cyn_stats, Tree_stats, Mud_stats]
